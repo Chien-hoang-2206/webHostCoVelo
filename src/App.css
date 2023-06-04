@@ -1,38 +1,173 @@
-.App {
+.Home {
+}
+.container {
+  min-height: 100vh;
+  background-color: #faf8f1;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.using-bicyle-container {
+  width: 358px;
+  height: 569px;
+  margin: 20px auto;
+  border-radius: 10px;
+  border: 1px solid gray;
+  position: relative;
+  left: 22px;
+  padding: 20px 20px;
+}
+.text {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.stt-text {
+  position: relative;
+  width: 20px;
+  top: -20px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.station-container {
+  border-radius: 10px;
+  border: 1px solid gray;
+  width: 61%;
+  height: 569px;
+  padding: 20px;
+  overflow: scroll;
+  display: grid;
+  border-radius: 10px;
+  grid-template-columns: auto auto auto auto;
+  position: relative;
+  top: 22px;
+  left: 37px;
+  row-gap: 23px;
+  column-gap: 20px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.bicycle-station {
+  width: 160px;
+}
+.station {
+  width: 160px;
+  height: 225px;
+  background-color: #faeab1;
+  border: 2px solid gray;
+  border-radius: 18px;
+}
+.label-station {
+  background-color: #c58940;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  border: 2px solid gray;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-content: center;
+}
+.label-text {
+  font-size: 30px;
+  font-weight: bolder;
+}
+.bicycles {
+  height: 30px;
+  padding: 5px 10px;
+  border-top: 1px solid black;
+  padding-bottom: 8px;
+}
+.label-using{
+
 }
 
-.App-link {
-  color: #61dafb;
+.input-box {
+  display: block;
+  margin: 0 auto;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.idbicycle {
+  position: relative;
+  width: 90px;
+  height: 20px;
+  left: -15px;
+}
+.icon-lock {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+}
+.button-icon-lock {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  left: 107px;
+  top: -66px;
+  background-color: transparent;
+  border: none;
+}
+.button-icon-unlock {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  left: 107px;
+  top: -97px;
+  background-color: transparent;
+  border: none;
+}
+.bicycle-lock{
+  padding-left: 20px;
+}
+.locker_empty {
+  position: relative;
+  background-color: #faf8f1;
+  border-radius: 5px;
+  width: 70px;
+  height: 30px;
+  left: 29px;
+  top: -71px;
+}
+.qrcode {
+  display: none;
+}
+.hover-qr {
+}
+.bycle-img {
+  position: relative;
+  border-radius: 5px;
+  width: 63px;
+  height: 1px;
+  left: 49px;
+  top: -71px;
+  object-fit: cover;
+}
+.qrcode.active {
+  display: block;
+  position: relative;
+  top: -108px;
+  left: 101px;
+  width: 132px;
+  height: 100px;
+  z-index: 20;
+  transition-delay: 2s;
+}
+.qr-img {
+  position: relative;
+}
+.using-content{
+  max-height: 516px;
+  overflow-y: scroll;
+  padding-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(2,40%);
+  row-gap: 20px;
+  column-gap: 20px;
+}
+.bicycle-using{
+  width: 69%;
+  height: 55px;
+  display: flex;
+}
+.img-using-bicycle{
+  position: relative;
+  top: 18px;
+  left: 20px;
 }
