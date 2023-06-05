@@ -29,6 +29,7 @@
 }
 .station-container {
   border-radius: 10px;
+  overflow: visible;
   border: 1px solid gray;
   width: 61%;
   height: 569px;
@@ -72,8 +73,7 @@
   border-top: 1px solid black;
   padding-bottom: 8px;
 }
-.label-using{
-
+.label-using {
 }
 
 .input-box {
@@ -113,7 +113,7 @@
   background-color: transparent;
   border: none;
 }
-.bicycle-lock{
+.bicycle-lock {
   padding-left: 20px;
 }
 .locker_empty {
@@ -143,7 +143,7 @@
   display: block;
   position: relative;
   top: -108px;
-  left: 101px;
+  left: -10px;
   width: 132px;
   height: 100px;
   z-index: 20;
@@ -152,21 +152,21 @@
 .qr-img {
   position: relative;
 }
-.using-content{
+.using-content {
   max-height: 516px;
   overflow-y: scroll;
   padding-bottom: 20px;
   display: grid;
-  grid-template-columns: repeat(2,40%);
+  grid-template-columns: repeat(2, 40%);
   row-gap: 20px;
   column-gap: 20px;
 }
-.bicycle-using{
+.bicycle-using {
   width: 69%;
   height: 55px;
   display: flex;
 }
-.img-using-bicycle{
+.img-using-bicycle {
   position: relative;
   top: 18px;
   left: 20px;

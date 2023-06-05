@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import Lock from './lock';
 
 
-const Station = (props) => {
-    const idStation = props.idStation;
+const Station = ({idStation,location,deleteBicycleUsing,usingRentalBicycle}) => {
     const [listLock, setListLock] = useState("");
-    
 
     useEffect(() => {
         fetchData();
     });
+
+    const deleteBicycleUsingCallBack = (bicycleID) => {
+        deleteBicycleUsing(bicycleID);
+        // const updateBycicleUsing = bicycleID.filter(user => user.id !== bicycleID);
+        // setusingRentalBicycle(updateBycicleUsing);
+    };
 
     async function fetchData() {
         const response = await fetch(`https://covelo.onrender.com/station/${idStation}`);
@@ -19,17 +23,17 @@ const Station = (props) => {
 
     const renderLocker = listLock && listLock.map((locker, index) => {
         return (
-            <Lock key={index} stt={index+1} status={locker.is_locked} id={locker.id} />
+            <Lock key={index} stt={index + 1} id={locker.id} idStation={idStation} status={locker.is_locked} usingRentalBicycle={usingRentalBicycle} deleteBicycleUsing={deleteBicycleUsingCallBack} />
         );
     });
 
     return (
         <div className="station">
             <div className="label-station">
-                <label className='label-text'>Trạm {props.location}</label>
+                <label className='label-text'>Trạm {location}</label>
             </div>
             <div className="bicycle-station">
-            {renderLocker}
+                {renderLocker}
             </div>
         </div>
     );

@@ -3,82 +3,102 @@ import React, { useState } from 'react';
 import QRImg from "../assets/qr/ID_1.png"
 import Bike from "../assets/bike.png"
 import { useDrop } from 'react-dnd';
-import Bicycle from './Bicycle';
 
-const bicycleslist = [
-    {
-        "id": 1,
-        "magnetic_key": 11111,
-        "location": "BK"
-    },
-    {
-        "id": 2,
-        "magnetic_key": 11112,
-        "location": "NN"
-    },
-    {
-        "id": 3,
-        "magnetic_key": 11113,
-        "location": "C"
-    },
-    {
-        "id": 4,
-        "magnetic_key": 11114,
-        "location": "D"
-    },
-    {
-        "id": 5,
-        "magnetic_key": 11115,
-        "location": "E"
-    },
-    {
-        "id": 6,
-        "magnetic_key": 11116,
-        "location": "F"
-    },
-    {
+const Lock = ({ stt, status,id, idStation, usingRentalBicycle,deleteBicycleUsing  }) => {
 
-        "id": 7,
-        "magnetic_key": 11117,
-        "location": "P"
-    }
-]
-
-const Lock = ({ stt, status, id }) => {
-    const [Id, setId] = useState("");
-
+    // const listBicycle = usingRentalBicycle;
     const [show, setShow] = useState(false);
-    const [isLock, setLocker] = useState({ status });
-    const [board, setBoard] = useState([]);
-    const [{ isOver }, drop] = useDrop(() => ({
+    const [isLock, setLocker] = useState(status);
+    const [showbicycle, setShowBicycle] = useState(false);
+
+    const [, drop] = useDrop(() => ({
         accept: "image",
-        drop: (item) => addImageToBoard(item.magnetic_key),
+        drop: (item) => addImageToBoard(item),
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
         }),
     }));
 
+    async function fetchDataEndTental(id) {
+        try {
+            const url = `https://covelo.onrender.com/rental/end/${id}`;
+            const options = {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    "end_station_id": idStation
+                }
+            };
+            const response = await fetch(url, options);
+            const data = await response.json();
+            if (data) {
+                console.log("🚀 --------------------------------------------------------------🚀");
+                console.log("🚀 ~ file: lock.js:30 ~ fetchDataEndTental ~ data:", data);
+                console.log("🚀 --------------------------------------------------------------🚀");
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
 
 
-    const addImageToBoard = (magnetic_key) => {
-        const boardL = bicycleslist.filter((bicycle) => bicycle.magnetic_key === magnetic_key);
-        setBoard((prevBoard) => [...prevBoard, boardL[0]]);
+    async function fetchDataBicycleMagneticKey(magnetic_key) {
+        try {
+            const url = `https://covelo.onrender.com/bicycle/update/${magnetic_key}`;
+            const options = {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    "locker": id
+                }
+            };
+            const response = await fetch(url, options);
+            const data = await response.json();
+            if (data) {
+                console.log("🚀 --------------------------------------------------------------🚀");
+                console.log("🚀 ~ file: lock.js:30 ~ fetchDataBicycleMagneticKey ~ data:", data);
+                console.log("🚀 --------------------------------------------------------------🚀");
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+
+    const addImageToBoard = (item) => {
+        const id = item.id;
+        const magnetic_key = item.magnetic_key;
+        console.log(id, magnetic_key);
+        console.log("🚀 -----------------------------------------------------------------🚀")
+        console.log("🚀 ~ file: lock.js:50 ~ fetchDataEndTental ~ idStation:", idStation)
+        console.log("🚀 -----------------------------------------------------------------🚀")
+        
+        // fetchDataEndTental(id);
+        // fetchDataBicycleMagneticKey(magnetic_key);
+        // setShowBicycle(true);
+        deleteBicycleUsing(id);
     };
+
     function handleSubmit() {
-        console.log(board[0].magnetic_key);
         alert("Đang khóa xe đạp.");
         setLocker(!isLock);
     }
     function handleUnlocl() {
-        alert("Đang mở khóa xe đạp.");
-        setLocker(!isLock);
+        handleShowQR();
+        // alert("Đang mở khóa xe đạp.");
     }
 
     function handleShowQR() {
         setShow(!show);
     }
+
     let image = null;
-    if (board.length > 0) {
+
+    if (showbicycle) {
         image = <img src={Bike} alt="s" className="bicycle-lock" />;
     }
 
@@ -109,7 +129,7 @@ const Lock = ({ stt, status, id }) => {
                     </div>
 
                     <div className="locker_empty" ref={drop} >
-                            {image}
+                        {image}
                     </div>
                     <button className='button-icon-unlock' onClick={handleSubmit}>
                         <img className='icon-lock' src='unlocked.png' alt='' />
