@@ -5,11 +5,13 @@ import Bicycle from './components/Bicycle';
 
 function App() {
   const [listStation, setListStation] = useState([]);
+
   const [usingRentalBicycle, setusingRentalBicycle] = useState([]);
 
   useEffect(() => {
     fetchDataListStatio();
     fetchDataUsingListBicycle();
+  
   }, []);
 
   async function fetchDataListStatio() {
@@ -37,10 +39,6 @@ function App() {
   }
 
   const deleteBicycleUsing = (bicycleID) => {
-    console.log("🚀 ----------------------------------------------------------------🚀")
-    console.log("🚀 ~ file: App.js:41 ~ deleteBicycleUsing ~ bicycleID:", bicycleID)
-    console.log("🚀 ----------------------------------------------------------------🚀")
-
     const updateBycicleUsing = usingRentalBicycle.filter(bicycle => bicycle.id !== bicycleID);
     setusingRentalBicycle(updateBycicleUsing);
   };
